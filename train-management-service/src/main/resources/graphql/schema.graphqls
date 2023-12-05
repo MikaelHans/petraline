@@ -1,0 +1,124 @@
+# schema.graphqls
+
+type Query {
+    cities: [City]
+    stations: [Station]
+    trains: [Train]
+    trainlines: [TrainLine]
+    trainClasses: [TrainClass]
+    trainSeats: [TrainSeat]
+    trainRoutes: [TrainRoute]
+    trainStops: [TrainStop]
+}
+
+type Mutation {
+    addCity(city: CityInput): City
+    addStation(station: StationInput): Station
+    addTrain(train: TrainInput): Train
+    addTrainline(trainline: TrainLineInput): TrainLine
+    addTrainClass(trainClass: TrainClassInput): TrainClass
+    addTrainSeat(trainSeat: TrainSeatInput): TrainSeat
+    addTrainRoute(trainRoute: TrainRouteInput): TrainRoute
+    addTrainStop(trainStop: TrainStopInput): TrainStop
+}
+
+input CityInput {
+    name: String
+}
+
+input StationInput {
+    name: String
+    cityId: ID!
+}
+
+input TrainInput {
+    name: String
+    trainlineId: ID!
+}
+
+input TrainLineInput {
+    name: String
+}
+
+input TrainClassInput {
+    carriageNumber: Int
+    name: String
+    trainId: ID
+}
+
+input TrainSeatInput {
+    rowNumber: Int
+    col: String
+    trainId: ID
+    trainClassId: ID
+}
+
+input TrainRouteInput {
+    trainId: ID
+    startStationId: ID
+    endStationId: ID
+}
+
+input TrainStopInput {
+    stopNumber: Int
+    stationId: ID
+    prevStopId: ID
+    nextStopId: ID
+    arrival: String
+    departure: String
+}
+
+type City{
+    id: ID!
+    name: String
+}
+
+type Station {
+    id: ID!
+    name: String
+    city: City
+}
+
+type Train {
+    id: ID!
+    name: String
+    trainline: TrainLine
+}
+
+type TrainLine {
+    id: ID!
+    name: String
+    trains: [Train]
+}
+
+type TrainClass {
+    id: ID!
+    carriageNumber: Int
+    name: String
+    train: Train
+}
+
+type TrainSeat {
+    id: ID!
+    rowNumber: Int
+    col: String
+    train: Train
+    trainClass: TrainClass
+}
+
+type TrainRoute {
+    id: ID!
+    train: Train
+    startStation: Station
+    endStation: Station
+}
+
+type TrainStop {
+    id: ID!
+    stopNumber: Int
+    station: Station
+    prevStop: TrainStop
+    nextStop: TrainStop
+    arrival: String
+    departure: String
+}

@@ -25,6 +25,12 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @QueryMapping
+    Iterable<User> user(@Argument UserEmail userEmail){
+        
+        return userRepository.findByEmail(userEmail.email);
+    }
+
     @MutationMapping
     User addUser(@Argument UserInput user){
         User newUser = new User(user.first_name, user.last_name,  new Date(LocalDate.now().getDayOfMonth()), user.email);
@@ -32,4 +38,6 @@ public class UserController {
     }
 
     record UserInput(String first_name, String last_name, String email){}
+
+    record UserEmail(String email){}
 }

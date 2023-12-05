@@ -1,5 +1,6 @@
 type Query{
     users: [Users]
+    user(userEmail:UserEmail):[Users]
 }
 
 type Mutation {
@@ -12,9 +13,13 @@ input UserInput{
     email: String
 }
 
+input UserEmail{
+    email: String
+}
+
 type Users {
     id: ID!
-    first_name: String
+    firstname: String
     last_name: String
     email: String
     join_date: String

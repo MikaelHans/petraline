@@ -34,11 +34,11 @@ public class User{
     private long id;
 
     @Column(
-        name = "first_name",
+        name = "firstname",
         nullable = false,
         columnDefinition = "VARCHAR(50)"
     )
-    private String first_name;
+    private String firstname;
 
     @Column(
         name = "last_name",
@@ -67,7 +67,7 @@ public class User{
     }    
 
     public User(String first_name, String last_name, Date join_date, String email) {
-        this.first_name = first_name;
+        this.firstname = first_name;
         this.last_name = last_name;
         this.join_date = join_date;
         this.email = email;
@@ -81,12 +81,12 @@ public class User{
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLast_name() {
@@ -112,7 +112,6 @@ public class User{
     public void setEmail(String email) {
         this.email = email;
     }
-
     
 }
 
